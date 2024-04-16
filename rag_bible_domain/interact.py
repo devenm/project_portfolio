@@ -27,7 +27,7 @@ def cli():
 
 def query_db_for_content(query_text, db):
     results = db.similarity_search_with_relevance_scores(query_text, k=3)
-    if len(results) == 0 or results[0][1] < 0.7:
+    if len(results) == 0 or results[0][1] < 0.5:
         print(f"Error: Question is out of scope of context.")
         sys.exit()
     context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
@@ -39,7 +39,7 @@ def model_response(context_text, query_text, results):
     print(prompt)
 
     model = ChatOpenAI()
-    response_text = model.predict(prompt)
+    response_text = model.invoke(prompt)
 
     sources = [doc.metadata.get("source", None) for doc, _score in results]
     formatted_response = f"Response: {response_text}\nSources: {sources}"

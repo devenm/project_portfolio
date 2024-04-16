@@ -12,13 +12,13 @@ DATA_PATH = "data"
 
 
 def load_docs():
-    loader = TextLoader("bsb.md")
+    loader = TextLoader("data/bsb.md")
     docs = loader.load()
     return docs
 
 def text_chunk(documents: list[Document]):
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=500,
+        chunk_size=1000,
         chunk_overlap=200,
         length_function=len,
         add_start_index=True,
