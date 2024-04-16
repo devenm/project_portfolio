@@ -3,3 +3,8 @@ venv/
 
 # Ignore CSV files
 *.csv
+
+*.txt
+*.md
+
+chroma/
